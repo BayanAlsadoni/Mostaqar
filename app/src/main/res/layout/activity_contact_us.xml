@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Profile.ContactUsActivity">
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="تواصل معنا"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:srcCompat="@drawable/contact_us_amico" />
+
+
+    <EditText
+        android:id="@+id/register_etUserName"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="عنوان الموضوع"
+        android:inputType="textPersonName"
+        android:paddingRight="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+
+    <EditText
+        android:id="@+id/register_etEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="السبب"
+        android:inputType="textEmailAddress"
+        android:paddingRight="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/register_etUserName"
+        app:layout_constraintStart_toStartOf="@+id/register_etUserName"
+        app:layout_constraintTop_toBottomOf="@+id/register_etUserName" />
+
+    <EditText
+        android:id="@+id/contact_etPhoneNum"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="رقم الهاتف"
+        android:inputType="phone"
+        android:paddingRight="20dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/register_etEmail"
+        app:layout_constraintStart_toStartOf="@+id/register_etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/register_etEmail" />
+
+    <EditText
+        android:id="@+id/register_etLocation"
+        android:layout_width="0dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="الرسالة"
+        android:inputType="textMultiLine|textPersonName"
+        android:paddingRight="20dp"
+        android:singleLine="false"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/contact_etPhoneNum"
+        app:layout_constraintStart_toStartOf="@+id/contact_etPhoneNum"
+        app:layout_constraintTop_toBottomOf="@+id/contact_etPhoneNum" />
+
+    <Button
+        android:id="@+id/buttonCreateAccountRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/blue"
+        android:padding="10dp"
+        android:text="إرسال"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/register_etLocation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/register_etLocation"
+        app:layout_constraintTop_toBottomOf="@+id/register_etLocation" />
+
+    <Button
+        android:id="@+id/buttonCreateAccountRegister2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:text="التواصل مع الدعم الفني"
+        android:textColor="@color/blue"
+        android:textSize="24sp"
+        app:cornerRadius="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/register_etLocation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/register_etLocation"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreateAccountRegister" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+</androidx.constraintlayout.widget.ConstraintLayout>

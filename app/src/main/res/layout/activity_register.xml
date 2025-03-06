@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".Activity.register.RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="إنشاء حساب"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imageView11"
+                app:layout_constraintStart_toStartOf="@+id/imageView11"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+            <EditText
+                android:id="@+id/register_etUserName"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="-4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="اسم المستخدم"
+                android:inputType="textPersonName"
+                android:paddingRight="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+<!--                android:drawableStart="@drawable/ic_person_outline"-->
+            <EditText
+                android:id="@+id/register_etEmail"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="البريد الالكتروني"
+                android:inputType="textEmailAddress"
+                android:paddingRight="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/register_etUserName"
+                app:layout_constraintStart_toStartOf="@+id/register_etUserName"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+<!--                android:drawableStart="@drawable/ic_mail_outline"-->
+
+            <EditText
+                android:id="@+id/etPhoneNum"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="رقم الهاتف"
+                android:inputType="phone"
+                android:paddingRight="20dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/register_etEmail"
+                app:layout_constraintStart_toStartOf="@+id/register_etEmail"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+<!--                android:drawableStart="@drawable/ic_call"-->
+            <EditText
+                android:id="@+id/register_etLocation"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="الموقع"
+                android:inputType="textPersonName"
+                android:paddingRight="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/etPhoneNum"
+                app:layout_constraintStart_toStartOf="@+id/etPhoneNum"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <EditText
+                android:id="@+id/register_etPassword"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:hint="كلمة المرور"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:inputType="textPassword"
+
+                android:paddingRight="20dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/register_etLocation"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/register_etLocation"
+                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+<!--                android:drawableStart="@drawable/ic_place"-->
+
+<!--                android:drawableStart="@drawable/ic_visibility_off"-->
+            <EditText
+                android:id="@+id/register_etConfirmPassword"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:hint="تأكيد كلمة المرور"
+                android:inputType="textPassword"
+                android:paddingRight="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="14sp"
+                android:textAlignment="textEnd"
+                app:layout_constraintEnd_toEndOf="@+id/register_etPassword"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/register_etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+<!--                android:drawableStart="@drawable/ic_visibility_off"-->
+            <Button
+                android:id="@+id/buttonCreateAccountRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/blue"
+                android:padding="10dp"
+                android:text="إنشاء"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_btnFacebook" />
+
+            <ImageView
+                android:id="@+id/register_btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="#00FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_left" />
+
+            <!--    <ImageView-->
+            <!--        android:id="@+id/buttonGoogleRegister"-->
+            <!--        android:layout_width="40dp"-->
+            <!--        android:layout_height="40dp"-->
+            <!--        android:layout_marginTop="24dp"-->
+            <!--        app:layout_constraintStart_toStartOf="@+id/textView6"-->
+            <!--        app:layout_constraintTop_toBottomOf="@+id/textView6"-->
+            <!--        tools:srcCompat="@drawable/ic_google" />-->
+
+            <!--    <ImageView-->
+            <!--        android:id="@+id/buttonFacebookRegister"-->
+            <!--        android:layout_width="40dp"-->
+            <!--        android:layout_height="40dp"-->
+            <!--        android:layout_marginStart="32dp"-->
+            <!--        app:layout_constraintEnd_toEndOf="@+id/textView6"-->
+            <!--        app:layout_constraintStart_toEndOf="@+id/buttonGoogleRegister"-->
+            <!--        app:layout_constraintTop_toTopOf="@+id/buttonGoogleRegister"-->
+            <!--        tools:srcCompat="@drawable/ic_facebook" />-->
+
+
+            <ImageView
+                android:id="@+id/register_btnFacebook"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/register_btnGoogle"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                app:srcCompat="@drawable/facebook" />
+
+            <ImageView
+                android:id="@+id/register_btnGoogle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/register_btnFacebook"
+                app:layout_constraintEnd_toStartOf="@+id/register_btnFacebook"
+                app:layout_constraintStart_toEndOf="@+id/register_btnX"
+                app:layout_constraintTop_toTopOf="@+id/register_btnFacebook"
+                app:srcCompat="@drawable/google" />
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="أوإنشاءحساب بواسطة"
+                android:textColor="@color/gray"
+
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/register_etConfirmPassword"
+                app:layout_constraintStart_toStartOf="@+id/register_etConfirmPassword"
+                app:layout_constraintTop_toBottomOf="@+id/register_etConfirmPassword" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/register_btnX"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/register_btnGoogle"
+                app:layout_constraintEnd_toStartOf="@+id/register_btnGoogle"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/register_btnGoogle"
+                app:srcCompat="@drawable/twitter" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="ليس لديك حساب؟"
+                android:textColor="@color/gray"
+                app:layout_constraintEnd_toEndOf="@+id/buttonCreateAccountRegister"
+                app:layout_constraintStart_toStartOf="@+id/buttonCreateAccountRegister"
+                app:layout_constraintTop_toBottomOf="@+id/buttonCreateAccountRegister" />
+
+            <TextView
+                android:id="@+id/register_tvSignin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp"
+                android:text="تسجيل الدخول"
+                android:textColor="@color/blue_light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView30"
+                app:layout_constraintStart_toStartOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="الاسم"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+
+                android:text="البريد الالكتروني"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@+id/register_etUserName"
+                app:layout_constraintTop_toBottomOf="@+id/register_etUserName" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="رقم الهاتف"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@+id/register_etEmail"
+                app:layout_constraintTop_toBottomOf="@+id/register_etEmail" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="الموقع"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@+id/textView42"
+                app:layout_constraintTop_toBottomOf="@+id/etPhoneNum" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="كلمة المرور"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@+id/register_etLocation"
+                app:layout_constraintTop_toBottomOf="@+id/register_etLocation" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="تأكيد كلمة المرور"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@+id/register_etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/register_etPassword" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

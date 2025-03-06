@@ -1,0 +1,88 @@
+//// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+//    ext {
+//        agp_version = '7.4.2'
+//        agp_version1 = '7.4.2'
+//    }
+    repositories {
+        google()
+        mavenCentral()
+
+        maven {url "https://maven.google.com"}
+        jcenter()
+    }
+    dependencies{
+    classpath "com.android.tools.build:gradle:7.4.2"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
+        classpath 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1'
+        classpath 'com.google.gms:google-services:4.4.2'
+//        classpath 'com.android.tools.build:gradle:3.2.0'
+//        classpath 'com.google.gms:google-services:4.0.1'
+
+//        classpath 'com.google.gms:google-services:4.3.10'
+
+//        classpath 'com.google.gms:google-services:4.3.15'
+    }
+}
+
+
+plugins {
+    id 'com.android.application' version '7.4.2' apply false
+    id 'com.android.library' version '7.4.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.0' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//tasks.named('mergeDebugResources').configure {
+//    dependsOn tasks.named('processDebugGoogleServices')
+//}
+
+
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//plugins {
+//    id 'com.android.application' version '7.4.2' apply false
+//    id 'com.android.library' version '7.4.2' apply false
+//    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+//}
+
+
+
+//plugins {
+////    id 'com.android.application' version '7.4.2' apply false
+////    id 'com.android.library' version '7.4.2' apply false
+////    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+//
+//    id 'com.android.application' version '8.0.0' apply false
+//    id 'com.android.library' version '8.0.0' apply false
+//    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+//
+//}
+//
+//
+////
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+//buildscript {
+//    repositories {
+//        google()  // Make sure this is here
+//        mavenCentral()  // And this
+//    }
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:8.x.x"  // Check for correct version
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.x.x"  // Correct version of Kotlin plugin
+//    }
+//}
+
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}

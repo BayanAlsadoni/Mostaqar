@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Profile.BlockPolicyActivity">
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        app:srcCompat="@drawable/warning_rafiki" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="المواد المحظورة"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:isScrollContainer="true"
+        scrollbars = "vertical"
+        android:overScrollMode="ifContentScrolls"
+        android:text="لدينا سابقة أعمال مشرفة. لدينا فريق متميز من أمهر المهندسين والاستشاريين  في مجال العقارات. تعد شركتنا من أكبر الشركات الرائدة في مجال  الاستثمار العقاري المصري. تمتلك الشركة تاريخ حافل بالانجازات والمشروعات  الناجحة. نتميز في الشركة بالالتزام بتسليم المشروعات وفق  الجدول الزمني المتفق عليه. من أبرز أسرار نجاح الشركة هو الالتزام بمواصفات  الجودة العالمية في البناء. نظرًا إلى التعاون مع نخبة من أمهر الخبراء في مجال  الاستثمار العقاري، استطاعت الشركة أن تكسب ثقة  شريحة كبيرة من العملاء. لدينا خبرة طويلة تتجاوز 10 سنوات في مجال  العقارات. هدفنا الأساسي هو إرضاء العملاء وتقديم خدمات  مميزة تنال إعجابهم. تقدم الشركة خيارات عقارية متنوعة، إلى جانب الأسعار  التنافسية وطرق السداد الميسرة. الاهتمام باختيار موقع المشروعات العقارية من أبرز  أسرار نجاح الاستثمار. نحرص في مشروعاتنا على توفير الخدمات المتكاملة  التي تخدم العملاء وتحقق لهم الاستقرار. من أهم ما يميز مشروعات شركتنا الاهتمام بالمساحات  الخضراء والمرافق الخدمية المتنوعة."
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+    android:padding="8dp">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/tve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="الموقع"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvFilterLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:ems="10"
+        android:hint="اختر الموقع"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray" />
+
+    <TextView
+        android:id="@+id/tvFilterPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="السعر"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="4000"
+        android:progress="2000"
+        android:progressBackgroundTint="@color/gray"
+        android:progressTint="@color/yellow"
+        android:thumbTint="@color/yellow" />
+
+    <TextView
+        android:id="@+id/tvFilterAdditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تصفيات إضافية"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lvSortFilter"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tvFilterAddtions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="الفئة"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lvFilterType"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/flat_item"
+        android:title="شقة"/>
+    <item
+        android:id="@+id/room_item"
+        android:title="غرفة"/>
+    <item
+        android:id="@+id/home_item"
+        android:title="منزل"/>
+<!--    <item-->
+<!--        android:id="@+id/villa_item"-->
+<!--        android:title="فيلا"/>-->
+
+</menu>
