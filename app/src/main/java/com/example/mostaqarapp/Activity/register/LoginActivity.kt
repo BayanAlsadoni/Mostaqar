@@ -8,6 +8,7 @@ import android.widget.*
 import com.example.mostaqarapp.Activity.HomeActivity
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.UserData
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val tvForgetPassword = findViewById<TextView>(R.id.tvForgetPassword)
         val tvRegister = findViewById<Button>(R.id.login_btnRegister)
         val btnGoogle = findViewById<ImageView>(R.id.login_btnGoogle)
+        val imgLoginPhone = findViewById<ImageView>(R.id.imgLoginPhone)
 
         auth = Firebase.auth
         firestore = Firebase.firestore
@@ -82,20 +84,22 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-//        btnGoogle.setOnClickListener {
-//            val signInRequest = BeginSignInRequest.builder()
-//                .setGoogleIdTokenRequestOptions(
-//                    BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-//                        .setSupported(true)
-//                        // Your server's client ID, not your Android client ID.
-////                        .setServerClientId(getString(R.string.your_web_client_id))
-//                        // Only show accounts previously used to sign in.
-//                        .setFilterByAuthorizedAccounts(true)
-//                        .build())
-//                .build()
-//        }
+        btnGoogle.setOnClickListener {
+            val signInRequest = BeginSignInRequest.builder()
+                .setGoogleIdTokenRequestOptions(
+                    BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        // Your server's client ID, not your Android client ID.
+//                        .setServerClientId(getString(R.string.your_web_client_id))
+                        // Only show accounts previously used to sign in.
+                        .setFilterByAuthorizedAccounts(true)
+                        .build())
+                .build()
+        }
+        imgLoginPhone.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
 
-//    }
     }
 
     fun userLogin(email:String, password:String){

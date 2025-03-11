@@ -37,19 +37,15 @@ class RegisterActivity : AppCompatActivity() {
         val etLocation = findViewById<EditText>(R.id.register_etLocation)
         val etPassword = findViewById<TextView>(R.id.register_etPassword)
         val etConfirmPassword = findViewById<TextView>(R.id.register_etConfirmPassword)
+        val tvRegisterTitel = findViewById<TextView>(R.id.tvRegisterTitel)
         val tvSignin = findViewById<TextView>(R.id.register_tvSignin)
         val btnCreateAccount = findViewById<Button>(R.id.buttonCreateAccountRegister)
-        val btnFacebook = findViewById<ImageView>(R.id.register_btnFacebook)
+//        val btnFacebook = findViewById<ImageView>(R.id.register_btnFacebook)
         val btnGoogle = findViewById<ImageView>(R.id.register_btnGoogle)
-        val btnX = findViewById<ImageView>(R.id.register_btnX)
+        val btnMail = findViewById<ImageView>(R.id.register_btnMail)
+        var isMail = false
 
          auth = FirebaseAuth.getInstance()
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        googleSignInClient = GoogleSignIn.getClient(this,gso)
-
 //        auth.getUsersAsync
 
        val signInRequest = BeginSignInRequest.builder()
@@ -64,6 +60,12 @@ class RegisterActivity : AppCompatActivity() {
             .build()
 //        googleSignInClient = GoogleSignIn.getClient(this, signInRequest)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this,gso)
+
         btbBack.setOnClickListener {
             finish()
         }
@@ -71,6 +73,20 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this,LoginActivity::class.java))
             finish()
         }
+
+        btnMail.setOnClickListener {
+            if(!isMail){
+                btnMail.setImageResource(R.drawable.baseline_phone_enabled)
+                isMail=true
+                tvRegisterTitel.text="إنشاء حساب باستخدام البريد الإلكتروني"
+            }else{
+                btnMail.setImageResource(R.drawable.baseline_mail)
+                isMail=false
+                tvRegisterTitel.text="إنشاء حساب باستخدام رقم الهاتف"
+            }
+
+        }
+
         btnCreateAccount.setOnClickListener {
 
             if(etUserName.text.isEmpty()){
@@ -92,68 +108,28 @@ class RegisterActivity : AppCompatActivity() {
                 etPassword.error = "الرجاء تعبئة هذا الحقل"
                 etPassword.requestFocus()
            }else{
-//               if (etPassword.text == etConfirmPassword.text){
-
-                   val user = UserData("",etUserName.text.toString(), etEmail.text.toString(), etPassword.text.toString(),etLocation.text.toString(),etPhoneNum.text.toString())
                 val i = Intent(this,VerificationActivity::class.java)
+                val user = UserData("",etUserName.text.toString(), etEmail.text.toString(), etPassword.text.toString(),
+                    etLocation.text.toString(),etPhoneNum.text.toString())
                 i.putExtra("user",user)
-                Toast.makeText(this, "user is ${user}", Toast.LENGTH_SHORT).show()
-                startActivity(i)
+                if(isMail){
+                    i.putExtra("isMail",isMail)
+                    Toast.makeText(this, "verify by mail", Toast.LENGTH_SHORT).show()
+                    startActivity(i)
 
-
-//               }else{
-//                   etConfirmPassword.error = "تأكدأنه مطابق لكلمة السر"
-//                   etConfirmPassword.requestFocus()
-//               }
-
+               }else{
+                   Toast.makeText(this, "user is ${user}", Toast.LENGTH_SHORT).show()
+                    i.putExtra("isMail",isMail)
+                   startActivity(i)
+               }
             }
-
         }
-        btnFacebook.setOnClickListener {
 
-        }
         btnGoogle.setOnClickListener {
             signInGoogle()
-
-        }
-        btnX.setOnClickListener {
-            auth.createUserWithEmailAndPassword(etEmail.text.toString(),etPassword.text.toString()).addOnCompleteListener {task->
-                if(task.isSuccessful){
-                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
-                        Toast.makeText(this, "register successfully please check your email", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,ConfirmActivity::class.java))
-                    }
-                }else{
-                    Toast.makeText(this, "verification faild", Toast.LENGTH_SHORT).show()
-
-                }
-            }
-
         }
 
     }
-
-
-    private fun addUserToken(uid:String, name:String,useremail:String){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if(!task.isSuccessful()){
-                Log.e("token","faild to get token")
-                return@addOnCompleteListener
-            }
-            val token = task.result.toString()
-            Log.e("token",token)
-            val userToken = hashMapOf<String,Any>(
-                "uid" to uid,
-                "token" to token,
-                "name" to name,
-                "email" to useremail,
-            )
-            Firebase.firestore.collection("tokens").add(userToken)
-
-
-        }
-    }
-
 
     fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
@@ -182,6 +158,7 @@ class RegisterActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 val goToConfirem = Intent(this,ConfirmActivity::class.java)
                 addUser(account.id,account.displayName,account.email,"","","")
+                addUserToken(account.id!!,account.displayName!!,account.email!!)
                 startActivity(goToConfirem)
             }else{
                 Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -208,9 +185,29 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(goToVerification)
 
             }.addOnFailureListener {
-//                Toast.makeText(context, "فشل إنشاء حساب", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "فشل إنشاء حساب", Toast.LENGTH_SHORT).show()
             }
     }
+    private fun addUserToken(uid:String, name:String,useremail:String){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if(!task.isSuccessful()){
+                Log.e("token","faild to get token")
+                return@addOnCompleteListener
+            }
+            val token = task.result.toString()
+            Log.e("token",token)
+            val userToken = hashMapOf<String,Any>(
+                "uid" to uid,
+                "token" to token,
+                "name" to name,
+                "email" to useremail,
+            )
+            Firebase.firestore.collection("tokens").add(userToken)
+
+
+        }
+    }
+
 
 
 }

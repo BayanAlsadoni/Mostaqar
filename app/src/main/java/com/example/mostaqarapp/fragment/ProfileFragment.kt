@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.mostaqarapp.Activity.register.ChooseRegistering
 import com.example.mostaqarapp.Profile.ContactUsActivity
 import com.example.mostaqarapp.Profile.EditProfileActivity
@@ -17,6 +17,8 @@ import com.example.mostaqarapp.R
 import com.example.mostaqarapp.adapter.ProfileAdapter
 import com.example.mostaqarapp.data.ProfileData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -37,19 +39,27 @@ class ProfileFragment : Fragment() {
         val cardViewContactUs = root.findViewById<CardView>(R.id.cardViewContactUs)
         val cardViewLogout = root.findViewById<CardView>(R.id.cardViewLogout)
         val cardViewAccount = root.findViewById<CardView>(R.id.cardViewAccount)
-        val cardViewFollowList = root.findViewById<CardView>(R.id.cardViewFollowList)
+        val cardViewFollowList = root.findViewById<CardView>(R.id.cardViewHomeList)
+        val tvProfName = root.findViewById<TextView>(R.id.tvProfName)
 //        val clEditProfile = root.findViewById<ConstraintLayout>(R.id.clEditProfile)
         val profData = ArrayList<ProfileData>()
+
+        Firebase.firestore.collection("users").get().addOnSuccessListener {qs ->
+            for(doc in qs){
+                if(doc["uid"] == Firebase.auth.currentUser?.uid){
+                    tvProfName.text = doc["name"].toString()
+                }
+            }
+        }
 
         cardViewLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(context, ChooseRegistering::class.java))
-//            Firebase.auth.signOut()
         }
         cardViewAccount.setOnClickListener {
-//            startActivity(Intent(context,EditProfileActivity::class.java))
            startActivity(Intent(context, EditProfileActivity::class.java))
-
+        }
+        cardViewFollowList.setOnClickListener {
 
         }
 

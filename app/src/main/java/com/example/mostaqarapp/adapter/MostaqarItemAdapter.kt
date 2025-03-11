@@ -15,11 +15,11 @@ import com.example.mostaqarapp.Activity.DetailesActivity
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.HomeData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -30,6 +30,9 @@ class MostaqarItemAdapter(val context: Context, val data: ArrayList<HomeData>):R
         val tvHomeTitle = itemView.findViewById<TextView>(R.id.tvHomeTitle)
         val tvHomeLocation = itemView.findViewById<TextView>(R.id.tvHomeLocation)
         val tvHomePrice = itemView.findViewById<TextView>(R.id.tvHomePrice)
+        val tvSpaceItem = itemView.findViewById<TextView>(R.id.tvSpaceItem)
+        val tvRoomItem = itemView.findViewById<TextView>(R.id.tvroomNumber)
+        val tvBathItem = itemView.findViewById<TextView>(R.id.tvBathItem)
 //        val tvpublishTime = itemView.findViewById<TextView>(R.id.tvpublishTime)
 //        val tvPublisherName = itemView.findViewById<TextView>(R.id.tvPublisherName)
 //        var publisherImage = itemView.findViewById<ImageView>(R.id.publisherImage)
@@ -49,28 +52,30 @@ class MostaqarItemAdapter(val context: Context, val data: ArrayList<HomeData>):R
     override fun onBindViewHolder(holder: AdapterHolder, position: Int) {
         val home = data[position]
 
-        home.ownerId
-        home.ownerImage
-        home.title
-
-        home.description
-        home.homeImage
         home.homeVideo
-
-        home.space
-        home.stayTime
-        Picasso.get().load(home.homeImage).placeholder(R.drawable.home_details) // Add a default image in `res/drawable`
+        holder.tvSpaceItem.text = "${home.space} M² "
+        Log.e("home room tv","${holder.tvRoomItem?.text}")
+        Log.e("home room","${home.room}")
+        holder.tvRoomItem.setText( "${home.room} غرف ")
+        holder.tvBathItem.text = "${home.bathroom} حمام "
+        Picasso.get().load(home.homeImage).placeholder(R.drawable.home_details)
             .error(R.drawable.homeone).into(holder.homeImage)
-//        Picasso.get().load(home.personImage).into()
 
         holder.tvHomeLocation.text = home.location
         holder.tvHomePrice.text = home.price
         holder.tvHomeTitle.text = home.title
 
         holder.itemView.setOnClickListener {
-            val gotToDitailesActivity = Intent(context, DetailesActivity::class.java)//DetailesActivity fraggment
-            gotToDitailesActivity.putExtra("home",home)
-            context.startActivity(gotToDitailesActivity)
+            val gotToDetailsActivity = Intent(context, DetailesActivity::class.java)
+            gotToDetailsActivity.putExtra("home",home)
+
+            Firebase.firestore.collection("homes").whereEqualTo("uid",Firebase.auth.currentUser?.uid).get().addOnSuccessListener {qs->
+                gotToDetailsActivity.putExtra("isHomeOwner",true)
+
+            }
+
+
+            context.startActivity(gotToDetailsActivity)
 
         }
         var isSaved = false

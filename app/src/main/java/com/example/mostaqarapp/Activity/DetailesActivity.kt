@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,8 +14,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mostaqarapp.Activity.chat.ChatActivity
 import com.example.mostaqarapp.R
+import com.example.mostaqarapp.adapter.ChatAdapter
 import com.example.mostaqarapp.adapter.CommentAdapter
+import com.example.mostaqarapp.data.ChatData
 import com.example.mostaqarapp.data.CommentMessage
 import com.example.mostaqarapp.data.FCMMessage
 import com.example.mostaqarapp.data.FCMMessage.Companion.addTokenToHome
@@ -22,16 +26,11 @@ import com.example.mostaqarapp.data.FCMMessage.Companion.sendFCMMessage
 import com.example.mostaqarapp.data.HomeData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.BufferedOutputStream
 import java.io.OutputStream
@@ -64,13 +63,27 @@ class DetailesActivity : AppCompatActivity() {
         val tvType = findViewById<TextView>(R.id.tvDetailesType)
         val tvSpace = findViewById<TextView>(R.id.tvDetailesSpace)
         val tvPublisherName = findViewById<TextView>(R.id.tvPublisherName)
+        val details_tvBedroomNom = findViewById<TextView>(R.id.details_tvBedroomNom)
+        val details_tvBathroomNom = findViewById<TextView>(R.id.details_tvBathroomNom)
+        val tvSpaceDetails = findViewById<TextView>(R.id.tvSpaceDetails)
+        val tvRoomDetails = findViewById<TextView>(R.id.tvRoomDetails)
+        val tvBathDetails = findViewById<TextView>(R.id.tvBathDetails)
         val userAccountImage = findViewById<ImageView>(R.id.userAccountImage)
+        val imgHomeDetails = findViewById<ImageView>(R.id.imgHomeDetails)
         val imgBtnSave = findViewById<ImageButton>(R.id.detailsImgBtnSave)
         val fabtnNotifiDetails = findViewById<FloatingActionButton>(R.id.fabtnNotifiDetails)
-        val fabSharDetails = findViewById<FloatingActionButton>(R.id.fabSharDetails)
+        val fabVideo = findViewById<FloatingActionButton>(R.id.fabSharDetails)
         val imgbtnPhoneNumber = findViewById<ImageButton>(R.id.imgbtnPhoneNumber)
+        val imgBtnEditHome = findViewById<ImageButton>(R.id.imgBtnEditHome)
+        val imgBtnDeleteHome = findViewById<ImageButton>(R.id.imgBtnDeleteHome)
+        val imgBtnMessagingDetails = findViewById<ImageButton>(R.id.imgBtnMessegingDetails)
 
         var homeId:String? = ""
+        val isHomeOwner = intent.getBooleanExtra("isHomeOwner",false)
+        if (isHomeOwner){
+            imgBtnEditHome.visibility = View.VISIBLE
+            imgBtnDeleteHome.visibility = View.VISIBLE
+        }
 
         if (home!=null){
             tvTitle.text = home.title
@@ -79,17 +92,36 @@ class DetailesActivity : AppCompatActivity() {
             tvDescription.text = home.description
             tvType.text = home.homeType
             tvSpace.text = home.space
+            tvSpaceDetails.text = "${home.space}M²"
             tvPublisherName.text = home.ownerName
-//            Picasso.get().load(home.ownerImage).into(userAccountImage)
+            details_tvBathroomNom.text = home.bathroom
+            tvBathDetails.text = "${home.bathroom} حمام "
+            details_tvBedroomNom.text = home.room
+            tvRoomDetails.text = "${home.room} غرف "
+
             homeId = home.id
-            if (!home.ownerImage.isNullOrEmpty()) {
-                Picasso.get().load(home.ownerImage).into(userAccountImage)
-            } else {
-                userAccountImage.setImageResource(R.drawable.man_user) // Use a placeholder image
-            }
+            Picasso.get().load(home.homeImage).placeholder(R.drawable.home_details)
+                .error(R.drawable.homeone).into(imgHomeDetails)
+            Picasso.get().load(home.ownerImage).placeholder(R.drawable.home_details)
+                .error(R.drawable.click_account).into(userAccountImage)
 
         }
         var isFirstImage = true
+
+        imgBtnEditHome.setOnClickListener {
+
+        }
+        imgBtnDeleteHome.setOnClickListener {
+            Firebase.firestore.collection("homes").document(home?.id.toString()).delete()
+        }
+
+        imgBtnMessagingDetails.setOnClickListener {
+            val gotToChat = Intent(this,ChatActivity::class.java)
+            gotToChat.putExtra("sender_id",home?.ownerId)
+            gotToChat.putExtra("sender_name",home?.ownerName)
+            gotToChat.putExtra("sender_image",home?.ownerImage)
+            startActivity(gotToChat)
+        }
 
         imgBtnSave.setOnClickListener {
 
@@ -156,6 +188,26 @@ class DetailesActivity : AppCompatActivity() {
                 }
 
             })
+        val chatData = ArrayList<ChatData>()
+        val chatAdapter = ChatAdapter(this,chatData)
+        ref.child("messageComment").child(home!!.id!!).child("comment")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot){
+                    chatData.clear()
+
+                    for(postSnapshot in snapshot.children) {
+                        val message = postSnapshot.getValue(ChatData::class.java)
+                        chatData.add(message!!)
+                    }
+                    chatAdapter.notifyDataSetChanged()
+                    chatAdapter.notifyItemInserted(chatData.size -1)
+                    rvComments.scrollToPosition(chatData.size -1)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+            })
 
         btnSendComment.setOnClickListener {
             val message = etComment.text.toString()
@@ -165,7 +217,7 @@ class DetailesActivity : AppCompatActivity() {
             val hours = (timestamp / (1000 * 60 * 60) % 24)
             val time = "$hours:$minutes:$seconds"
 
-            Firebase.firestore.collection("users").get().addOnSuccessListener { querySnapshot ->
+            Firebase.firestore.collection("users").whereEqualTo("id",home.id).get().addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
                     val data = document.data
                     val useruid = data["uid"].toString()
@@ -173,7 +225,7 @@ class DetailesActivity : AppCompatActivity() {
                         val username = data["name"].toString()
                         val messageObject = CommentMessage(uid, username, message, time)
                         if (etComment.text.isEmpty()) return@addOnSuccessListener
-                        ref.child("messageComment").child(name).push()
+                        ref.child("messageComment").child(home.id!!).child("comment").push()
                             .setValue(messageObject)
                         etComment.setText("")
                     }
@@ -215,8 +267,10 @@ class DetailesActivity : AppCompatActivity() {
 
         }
 
-        fabSharDetails.setOnClickListener {
-            val share = Intent(Intent.ACTION_SEND)
+        fabVideo.setOnClickListener {
+            val goToVideo = Intent(this,HomeVideoActivity::class.java)
+            goToVideo.putExtra("videoUrl",home?.homeVideo)
+            startActivity(goToVideo)
         }
 
     }

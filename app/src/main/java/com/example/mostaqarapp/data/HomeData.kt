@@ -18,8 +18,11 @@ class HomeData(
     var homeType:String? = "",
     var space:String? = "",
     var stayTime:String? = "",
-    var homeDetails:HomeDetails? = null): Parcelable {
+    var room:String? = "",
+    var bathroom:String? = ""): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -51,6 +54,8 @@ class HomeData(
         parcel.writeString(homeType)
         parcel.writeString(space)
         parcel.writeString(stayTime)
+        parcel.writeString(room)
+        parcel.writeString(bathroom)
     }
 
     override fun describeContents(): Int {

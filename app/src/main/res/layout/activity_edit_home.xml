@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/detailsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:verticalScrollbarPosition="defaultPosition"
     android:background="@color/white"
-    tools:context=".fragment.AddHomeFragment">
+    tools:context=".Profile.EditHomeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +20,6 @@
             android:id="@+id/fragmentAddHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <ImageView
                 android:id="@+id/imageView17"
@@ -52,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
                 android:text="إضافة عنوان العرض"
                 android:textAlignment="viewStart"
@@ -61,7 +57,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditLocation" />
 
             <TextView
                 android:id="@+id/tvTitle2"
@@ -77,26 +73,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditName" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditTitle" />
 
             <TextView
                 android:id="@+id/tvAddImg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:text="إضافة صورة المستقر"
+                android:text="صورة المستقر"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <EditText
-                android:id="@+id/etEditLocation"
+                android:id="@+id/etEditPrice"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:backgroundTint="@color/black"
@@ -120,10 +116,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditPhone" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditDescription" />
 
             <EditText
-                android:id="@+id/etEditBio"
+                android:id="@+id/etEditSpace"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:backgroundTint="@color/black"
@@ -146,11 +142,11 @@
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/etEditLocation"
-                app:layout_constraintTop_toBottomOf="@+id/etEditPhone" />
+                app:layout_constraintStart_toEndOf="@+id/etEditPrice"
+                app:layout_constraintTop_toBottomOf="@+id/etEditDescription" />
 
             <TextView
-                android:id="@+id/etAddType"
+                android:id="@+id/etEditType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -172,7 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginEnd="16dp"
                 android:text="نوع المستقر"
                 android:textAlignment="viewStart"
@@ -181,10 +177,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddVideo" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditVideo" />
 
             <TextView
-                android:id="@+id/etAddVideo"
+                android:id="@+id/etEditVideo"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="8dp"
@@ -212,10 +208,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddImg" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditImg" />
 
             <TextView
-                android:id="@+id/etAddImg"
+                android:id="@+id/etEditImg"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="8dp"
@@ -231,7 +227,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvAddImg" />
 
             <EditText
-                android:id="@+id/etAddLocation"
+                android:id="@+id/etEditLocation"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -260,10 +256,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddType" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditType" />
 
             <EditText
-                android:id="@+id/etEditName"
+                android:id="@+id/etEditTitle"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -279,7 +275,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
             <EditText
-                android:id="@+id/etEditPhone"
+                android:id="@+id/etEditDescription"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -296,15 +292,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle2" />
 
             <Button
-                android:id="@+id/add_btnNext"
+                android:id="@+id/Edit_btnNext"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/blue"
-                android:text="إضافة"
+                android:text="تعديل"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:cornerRadius="15dp"
@@ -312,17 +308,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etRoomNum" />
-
-            <ImageView
-                android:id="@+id/imageView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/houses"
-                app:layout_constraintEnd_toEndOf="@+id/textView18"
-                app:layout_constraintHorizontal_bias="0.536"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditRoomNum" />
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -335,15 +321,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imgBtnAddLocationMap"
+                android:id="@+id/imgBtnEditLocationMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:backgroundTint="#00FFFFFF"
                 android:src="@drawable/ic_add_location"
-                app:layout_constraintBottom_toBottomOf="@+id/etAddLocation"
-                app:layout_constraintEnd_toEndOf="@+id/etAddLocation"
-                app:layout_constraintTop_toTopOf="@+id/etAddLocation" />
+                app:layout_constraintBottom_toBottomOf="@+id/etEditLocation"
+                app:layout_constraintEnd_toEndOf="@+id/etEditLocation" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -356,10 +341,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditPrice" />
 
             <EditText
-                android:id="@+id/etRoomNum"
+                android:id="@+id/etEditRoomNum"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:backgroundTint="@color/black"
@@ -369,7 +354,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintEnd_toEndOf="@+id/etEditLocation"
+                app:layout_constraintEnd_toEndOf="@+id/etEditPrice"
                 app:layout_constraintStart_toEndOf="@+id/imageView17"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
 
@@ -383,11 +368,11 @@
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/etRoomNum"
+                app:layout_constraintStart_toEndOf="@+id/etEditRoomNum"
                 app:layout_constraintTop_toBottomOf="@+id/tvSpaceItem" />
 
             <EditText
-                android:id="@+id/etBathNum"
+                android:id="@+id/etEditBathNum"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:backgroundTint="@color/black"
@@ -397,8 +382,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintEnd_toEndOf="@+id/etEditBio"
-                app:layout_constraintStart_toStartOf="@+id/etEditBio"
+                app:layout_constraintEnd_toEndOf="@+id/etEditSpace"
+                app:layout_constraintStart_toStartOf="@+id/etEditSpace"
                 app:layout_constraintTop_toTopOf="@+id/textView5"
                 app:layout_constraintVertical_bias="0.315" />
 
@@ -419,4 +404,4 @@
     </ScrollView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

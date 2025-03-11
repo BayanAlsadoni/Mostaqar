@@ -36,6 +36,8 @@ class AddHomeFragment : Fragment() {
     lateinit var etLocation:EditText
     lateinit var etPrice:EditText
     lateinit var etSpace:EditText
+    lateinit var etRoomNum:EditText
+    lateinit var etBathNum:EditText
     lateinit var tvImage:TextView
     lateinit var tvVideo:TextView
     lateinit var tvType:TextView
@@ -68,6 +70,8 @@ class AddHomeFragment : Fragment() {
         etLocation = root.findViewById<EditText>(R.id.etAddLocation)
         etPrice = root.findViewById<EditText>(R.id.etEditLocation)
         etSpace = root.findViewById<EditText>(R.id.etEditBio)
+        etRoomNum = root.findViewById<EditText>(R.id.etRoomNum)
+        etBathNum = root.findViewById<EditText>(R.id.etBathNum)
         val btnNext = root.findViewById<Button>(R.id.add_btnNext)
         val imgBtnAddLocationMap = root.findViewById<ImageButton>(R.id.imgBtnAddLocationMap)
 
@@ -168,10 +172,12 @@ class AddHomeFragment : Fragment() {
                         videoURL = task.result.toString()
                         uploadImageData(uri!!)
                         dialog.dismiss()
-                        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                        Log.e("add home","success")
                     } else {
                         dialog.dismiss()
-                        Toast.makeText(requireContext(), "Failed to upload video", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "Failed to upload video", Toast.LENGTH_SHORT).show()
+                        Log.e("add home","fail")
                     }
                 }
 
@@ -180,7 +186,8 @@ class AddHomeFragment : Fragment() {
             if (uri!=null) {
                 uploadImageData(uri!!)
             }else {
-                Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
+                Log.e("upload image","fail")
             }
 
     }
@@ -222,6 +229,8 @@ class AddHomeFragment : Fragment() {
         val price = etPrice.text.toString()
         val type = tvType.text.toString()
         val space = etSpace.text.toString()
+        val room = etRoomNum.text.toString()
+        val bath = etBathNum.text.toString()
 
         val la= requireActivity().intent.getDoubleExtra("product_latitude",31.32535135135135)
         val lo= requireActivity().intent.getDoubleExtra("product_longitude",34.29015667840477)
@@ -233,7 +242,7 @@ class AddHomeFragment : Fragment() {
 
         val home = hashMapOf<String,Any>("id" to id,"ownerName" to uname, "ownerId" to uid, "ownerImage" to uimage, "title" to title
             , "price" to price, "location" to locat, "description" to description, "homeImage" to imageUrl,
-            "mapLocation" to GeoPoint(la,lo),"homeType" to type, "homeVideo" to videoUrl, "space" to space)
+            "mapLocation" to GeoPoint(la,lo),"homeType" to type, "homeVideo" to videoUrl, "space" to space,"room" to room, "bath" to bath)
 
         db.collection("home")
             .add(home)

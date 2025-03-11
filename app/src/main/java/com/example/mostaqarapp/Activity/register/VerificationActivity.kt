@@ -1,10 +1,13 @@
 package com.example.mostaqarapp.Activity.register
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.mostaqarapp.Activity.HomeActivity
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.HomeData
@@ -36,6 +39,7 @@ class VerificationActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         user = intent.getParcelableExtra<UserData>("user")
+        val isMail = intent.getBooleanExtra("isMail",false)
         val phoneNumber = user!!.phone!!
 
         val etVerify1 = findViewById<EditText>(R.id.etVerify1)
@@ -45,26 +49,48 @@ class VerificationActivity : AppCompatActivity() {
         val etVerify5 = findViewById<EditText>(R.id.etVerify5)
         val etVerify6 = findViewById<EditText>(R.id.etVerify6)
         val btnVerify = findViewById<Button>(R.id.btnVerfy)
+        val linearLayoutVerify = findViewById<LinearLayout>(R.id.linearLayoutVerify)
         tvTimeout = findViewById(R.id.tvTimeout)
         val resendCode = findViewById<TextView>(R.id.sedAgain)
+        val tvFerifyTitle = findViewById<TextView>(R.id.tvFerifyTitle)
 
-        startPhoneNumberVerification(phoneNumber)
-//        FirebaseAuth.getInstance().getFirebaseAuthSettings().forceRecaptchaFlowForTesting(true)
-
-        btnVerify.setOnClickListener {
-            val userCode = etVerify1.text.toString() + etVerify2.text.toString() +etVerify3.text.toString() +
-                    etVerify4.text.toString()+ etVerify5.text.toString()+ etVerify6.text.toString()
-            Log.e("phone","use enter code is $userCode")
-
-            if (userCode.length < 6) {
-                Toast.makeText(this, "wrong OTP..$userCode", Toast.LENGTH_SHORT).show()
-            } else {
-                verifyCode(userCode)
+        if (isMail){
+            linearLayoutVerify.visibility = View.INVISIBLE
+            tvTimeout.visibility = View.INVISIBLE
+            btnVerify.visibility = View.INVISIBLE
+            auth.createUserWithEmailAndPassword(user!!.email!!,user!!.password!!).addOnCompleteListener {task->
+                if(task.isSuccessful){
+                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
+                        tvFerifyTitle.setText( "يرجى التحقق من رابط التحقق المرسل إلى بريدك")
+//                        if(auth.currentUser!!.isEmailVerified){
+                            startActivity(Intent(this,ConfirmActivity::class.java))
+                            addUser(auth.currentUser!!.uid,user!!.name,user!!.email,user!!.password,user!!.location,user!!.phone)
+                            addUserToken(auth.currentUser!!.uid, user!!.name, user!!.email)
+//                        }
+                    }
+                }else{
+                    Toast.makeText(this, "verification faild", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
+        }else{
+            tvFerifyTitle.text = "يرجى التحقق من رابط التحقق المرسل إلى بريدك"
+            startPhoneNumberVerification(phoneNumber)
+    //        FirebaseAuth.getInstance().getFirebaseAuthSettings().forceRecaptchaFlowForTesting(true)
+            btnVerify.setOnClickListener {
+                val userCode = etVerify1.text.toString() + etVerify2.text.toString() +etVerify3.text.toString() +
+                        etVerify4.text.toString()+ etVerify5.text.toString()+ etVerify6.text.toString()
+                Log.e("phone","use enter code is $userCode")
 
-        resendCode.setOnClickListener {
-            resendVerificationCode(phoneNumber)
+                if (userCode.length < 6) {
+                    Toast.makeText(this, "wrong OTP..$userCode", Toast.LENGTH_SHORT).show()
+                } else {
+                    verifyCode(userCode)
+                }
+            }
+
+            resendCode.setOnClickListener {
+                resendVerificationCode(phoneNumber)
+            }
         }
     }
 
@@ -75,7 +101,7 @@ class VerificationActivity : AppCompatActivity() {
             .setPhoneNumber(phoneNumber)
             .setTimeout(60L, TimeUnit.SECONDS)
             .setActivity(this)
-            .setMultiFactorSession(multiFactorSession)
+//            .setMultiFactorSession(multiFactorSession)
             .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                     verificationCodeBySystem = verificationId
@@ -107,14 +133,9 @@ class VerificationActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 val u = task.result?.user
                 user?.uid = u?.uid
-
                 addUser(u?.uid,user!!.name,user!!.email,user!!.password,user!!.location,user!!.phone)
                 addUserToken(u?.uid, user!!.name, user!!.email)
                 Toast.makeText(this, "Authentication Successful", Toast.LENGTH_SHORT).show()
-
-                //addUser(user.uid, user.name, user.email, user.password, user.location, user.phone)
-                //addUserToken(user.uid, user.name, user.email)
-
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {

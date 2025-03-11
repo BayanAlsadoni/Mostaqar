@@ -143,12 +143,12 @@
                 android:padding="5dp"
                 android:textColor="@color/black"
                 android:textColorHint="#00FFFFFF"
-                app:layout_constraintEnd_toEndOf="@+id/tvSpace"
-                app:layout_constraintStart_toStartOf="@+id/tvSpace"
-                app:layout_constraintTop_toBottomOf="@+id/tvSpace" />
+                app:layout_constraintEnd_toEndOf="@+id/tvSpaceItem"
+                app:layout_constraintStart_toStartOf="@+id/tvSpaceItem"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpaceItem" />
 
             <TextView
-                android:id="@+id/tvSpace"
+                android:id="@+id/tvSpaceItem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

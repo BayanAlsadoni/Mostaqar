@@ -29,6 +29,9 @@ class HomeFragment : Fragment() {
 
     lateinit var homeList:ArrayList<HomeData>
     var isDuplicate = false
+    lateinit var MostAdapter:MostaqarItemAdapter
+    lateinit var rvHome:RecyclerView
+    val homeData = ArrayList<HomeData>()
 
     var displayList :  ArrayList<HomeData> = ArrayList()
 
@@ -41,30 +44,18 @@ class HomeFragment : Fragment() {
 
         val imgNotifi = root.findViewById<ImageView>(R.id.home_imgNotifi)
         val imgFilter = root.findViewById<ImageView>(R.id.imgFilter)
-        val btnDirect = root.findViewById<Button>(R.id.btnDirect)
-        val btnNotDirect = root.findViewById<Button>(R.id.btnNotDirect)
-
+        rvHome = root.findViewById<RecyclerView>(R.id.rvHome)
         val search = root.findViewById<SearchView>(R.id.searchViewHome)
-
 
         val auth = Firebase.auth
         firestore = Firebase.firestore
         val dbRef = FirebaseDatabase.getInstance().getReference("tasks")
-
 
         val homeList = ArrayList<HomeData>()
         val desplayhome = ArrayList<HomeData>()
         var loc=""
 
         search.clearFocus()
-
-        btnDirect.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.rlContainer,NotDirectFragment())
-        }
-        btnNotDirect.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.rlContainer,MapsFragment())
-
-        }
 
         imgFilter.setOnClickListener {
 
@@ -151,6 +142,8 @@ class HomeFragment : Fragment() {
 
 
 
+        getHomesFromFirebase()
+
         return root
     }
 
@@ -163,6 +156,44 @@ class HomeFragment : Fragment() {
     private fun sortDescending() {
 //        homeData.sortByDescending { it.title }
 //        homeRecyclerView.adapter!!.notifyDataSetChanged()
+    }
+
+    private fun getHomesFromFirebase(){
+        Log.e("getHome","in function")
+        firestore.collection("home").get()
+            .addOnSuccessListener { result ->
+                homeData.clear()
+                Log.e("getHome","get collection")
+                for (document in result){
+                    Log.e("getHome","getDocument${document}")
+                    val home = HomeData(
+                        document.getString("id"),
+                        document.getString("ownerName"),
+                        document.getString("ownerId"),
+                        document.getString("ownerImage"),
+                        document.getString("title"),
+                        document.getString("price"),
+                        document.getString("location"),
+                        document.getString("description"),
+                        document.getString("homeImage"),
+                        document.getString("homeVideo"),
+                        document.getString("homeType"),
+                        document.getString("space"),
+                        document.getString("stayTime"),
+                        document.getString("room"),
+                        document.getString("bath")
+                    )
+                    homeData.add(home)
+                    Toast.makeText(context, "${home}", Toast.LENGTH_SHORT).show()
+                }
+                MostAdapter = MostaqarItemAdapter(requireContext(),homeData)//
+                rvHome.layoutManager = LinearLayoutManager(requireContext())
+                rvHome.adapter = MostAdapter
+
+                rvHome.adapter?.notifyDataSetChanged()
+            }.addOnFailureListener { exception ->
+                Log.e("homeError","error in getHome from firebase")
+            }
     }
 
 
