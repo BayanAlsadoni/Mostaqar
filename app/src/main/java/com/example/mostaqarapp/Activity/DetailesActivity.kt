@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mostaqarapp.Activity.chat.ChatActivity
@@ -24,6 +25,7 @@ import com.example.mostaqarapp.data.FCMMessage
 import com.example.mostaqarapp.data.FCMMessage.Companion.addTokenToHome
 import com.example.mostaqarapp.data.FCMMessage.Companion.sendFCMMessage
 import com.example.mostaqarapp.data.HomeData
+import com.example.mostaqarapp.map.LocationMapsActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -47,13 +49,13 @@ class DetailesActivity : AppCompatActivity() {
         var name =""
 
         val ref = FirebaseDatabase.getInstance().getReference()
-        val uid = Firebase.auth.uid
+        val uid = Firebase.auth.currentUser!!.uid
         val messageList = ArrayList<CommentMessage>()
-        val adapter = CommentAdapter(this, messageList)
+
 
         val rvComments = findViewById<RecyclerView>(R.id.rvComments)
         val etComment = findViewById<EditText>(R.id.etComment)
-        val btnSendComment = findViewById<ImageView>(R.id.btnSendComment)
+        val btnSendComment = findViewById<FloatingActionButton>(R.id.btnSendComment)
         val rvHomeImages = findViewById<RecyclerView>(R.id.rvHomeImages)
 
         val tvTitle = findViewById<TextView>(R.id.tvDetailesTitle)
@@ -77,6 +79,7 @@ class DetailesActivity : AppCompatActivity() {
         val imgBtnEditHome = findViewById<ImageButton>(R.id.imgBtnEditHome)
         val imgBtnDeleteHome = findViewById<ImageButton>(R.id.imgBtnDeleteHome)
         val imgBtnMessagingDetails = findViewById<ImageButton>(R.id.imgBtnMessegingDetails)
+        val cardViewLocation = findViewById<CardView>(R.id.cardViewLocation)
 
         var homeId:String? = ""
         val isHomeOwner = intent.getBooleanExtra("isHomeOwner",false)
@@ -168,8 +171,11 @@ class DetailesActivity : AppCompatActivity() {
                     val message = snapshot.getValue(CommentMessage::class.java)
                     if (message != null) {
                         messageList.add(message)
+                        val adapter = CommentAdapter(this@DetailesActivity, messageList)
                         adapter.notifyDataSetChanged()
                         adapter.notifyItemInserted(messageList.size - 1)
+                        rvComments.layoutManager = LinearLayoutManager(this@DetailesActivity)
+                        rvComments.adapter = adapter
                         rvComments.scrollToPosition(messageList.size - 1)
 
                     }
@@ -210,27 +216,30 @@ class DetailesActivity : AppCompatActivity() {
             })
 
         btnSendComment.setOnClickListener {
+            Toast.makeText(this, "btn send clicked", Toast.LENGTH_SHORT).show()
             val message = etComment.text.toString()
             val timestamp = System.currentTimeMillis()
             val seconds = (timestamp / 1000) % 60
             val minutes = (timestamp / (1000 * 60) % 60)
             val hours = (timestamp / (1000 * 60 * 60) % 24)
             val time = "$hours:$minutes:$seconds"
-
-            Firebase.firestore.collection("users").whereEqualTo("id",home.id).get().addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot) {
-                    val data = document.data
-                    val useruid = data["uid"].toString()
-                    if (uid == useruid) {
-                        val username = data["name"].toString()
+            Toast.makeText(this, "id ${home.id}", Toast.LENGTH_SHORT).show()
+            Firebase.firestore.collection("users").whereEqualTo("uid",Firebase.auth.currentUser?.uid).get()
+              .addOnSuccessListener { querySnapshot ->
+                Toast.makeText(this, "get users", Toast.LENGTH_SHORT).show()
+//                for(doc in querySnapshot){
+//                    if(doc["id"]==home.id){
+                        Toast.makeText(this, "get current hoem", Toast.LENGTH_SHORT).show()
+//                        val username = querySnapshot.documents.get(0).get("ownerName").toString() //doc["ownerName"].toString()
+                        val username = querySnapshot.documents.get(0).get("name").toString()
                         val messageObject = CommentMessage(uid, username, message, time)
                         if (etComment.text.isEmpty()) return@addOnSuccessListener
                         ref.child("messageComment").child(home.id!!).child("comment").push()
                             .setValue(messageObject)
                         etComment.setText("")
-                    }
+//                    }
+//                }
 
-                }
 
             }
 
@@ -271,6 +280,15 @@ class DetailesActivity : AppCompatActivity() {
             val goToVideo = Intent(this,HomeVideoActivity::class.java)
             goToVideo.putExtra("videoUrl",home?.homeVideo)
             startActivity(goToVideo)
+        }
+        if(home.lat ==3.0 && home.lng ==3.0){
+            cardViewLocation.visibility = View.GONE
+        }
+        cardViewLocation.setOnClickListener {
+            val goToMap = Intent(this,LocationMapsActivity::class.java)
+            goToMap.putExtra("latitude",home.lat)
+            goToMap.putExtra("longitude",home.lng)
+            startActivity(goToMap)
         }
 
     }

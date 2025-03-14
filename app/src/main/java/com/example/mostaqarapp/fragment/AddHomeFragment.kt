@@ -2,6 +2,7 @@ package com.example.mostaqarapp.fragment
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +22,7 @@ import androidx.fragment.app.Fragment
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.HomeData
 import com.example.mostaqarapp.map.AddLocationMapFragment
+import com.example.mostaqarapp.map.AddMapsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,13 +37,14 @@ class AddHomeFragment : Fragment() {
     lateinit var etTitle:EditText
     lateinit var etDescription:EditText
     lateinit var etLocation:EditText
-    lateinit var etPrice:EditText
+//    lateinit var etPrice:EditText
     lateinit var etSpace:EditText
     lateinit var etRoomNum:EditText
     lateinit var etBathNum:EditText
-    lateinit var tvImage:TextView
+    lateinit var addImage:ImageView
     lateinit var tvVideo:TextView
     lateinit var tvType:TextView
+    lateinit var etAddPrice:TextView
     lateinit var db:FirebaseFirestore
     lateinit var auth:FirebaseAuth
     lateinit var pathe:String
@@ -62,18 +66,20 @@ class AddHomeFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_add_home, container, false)
 
-        etTitle = root.findViewById<EditText>(R.id.etEditName)
-        etDescription = root.findViewById<EditText>(R.id.etEditPhone)
-        tvImage = root.findViewById<TextView>(R.id.etAddImg)
+        etTitle = root.findViewById<EditText>(R.id.etAddTitle)
+        etDescription = root.findViewById<EditText>(R.id.etAddDescription)
+        addImage = root.findViewById<ImageView>(R.id.imgAddImg)
         tvVideo = root.findViewById<TextView>(R.id.etAddVideo)
         tvType = root.findViewById<TextView>(R.id.etAddType)
-        etLocation = root.findViewById<EditText>(R.id.etAddLocation)
-        etPrice = root.findViewById<EditText>(R.id.etEditLocation)
+        etLocation = root.findViewById<EditText>(R.id.etAddLocationText)
+//        etPrice = root.findViewById<EditText>(R.id.etEditLocation)
+        etAddPrice = root.findViewById<EditText>(R.id.etAddPrice)
         etSpace = root.findViewById<EditText>(R.id.etEditBio)
         etRoomNum = root.findViewById<EditText>(R.id.etRoomNum)
         etBathNum = root.findViewById<EditText>(R.id.etBathNum)
         val btnNext = root.findViewById<Button>(R.id.add_btnNext)
-        val imgBtnAddLocationMap = root.findViewById<ImageButton>(R.id.imgBtnAddLocationMap)
+//        val imgBtnAddLocationMap = root.findViewById<ImageButton>(R.id.imgBtnAddLocationMap)
+        val imgAddMapLocation = root.findViewById<ImageView>(R.id.imgAddMapLocation)
 
         val errorMessage = "الرجاء تعبئة هذا الحقل"
         btnNext.setOnClickListener {
@@ -86,9 +92,9 @@ class AddHomeFragment : Fragment() {
             }else if(etLocation.text.isEmpty()){
                 etLocation.error = errorMessage
                 etLocation.requestFocus()
-            }else if(etPrice.text.isEmpty()){
-                etPrice.error = errorMessage
-                etPrice.requestFocus()
+            }else if(etAddPrice.text.isEmpty()){
+                etAddPrice.error = errorMessage
+                etAddPrice.requestFocus()
             }else {
                 saveData()
             }
@@ -111,9 +117,11 @@ class AddHomeFragment : Fragment() {
         }
 //        tvType.text=itemType
 
-        imgBtnAddLocationMap.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.detailsFragment,AddLocationMapFragment()).commit()
-
+        imgAddMapLocation.setOnClickListener {
+            Log.e("Map","Map button clicked")
+//            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.detailsFragment,AddLocationMapFragment()).commit()
+//            activity?.supportFragmentManager?.beginTransaction()?.add(R.id.detailsFragment,AddLocationMapFragment())?.commit()
+                startActivity(Intent(context,AddMapsActivity::class.java))
         }
 
         val videoHome = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
@@ -135,12 +143,12 @@ class AddHomeFragment : Fragment() {
         ) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
                 uri = result.data?.data
-//                image.setImageURI(uri)
+                addImage.setImageURI(uri)
             } else {
                 Toast.makeText(requireContext(), "No Image Selected", Toast.LENGTH_SHORT).show()
             }
         }
-        tvImage.setOnClickListener {
+        addImage.setOnClickListener {
             val photoPicker = Intent(Intent.ACTION_GET_CONTENT)
             photoPicker.type = "image/*"
             activityResultLauncher.launch(photoPicker)
@@ -226,19 +234,14 @@ class AddHomeFragment : Fragment() {
         val title = etTitle.text.toString()
         val locat = etLocation.text.toString()
         val description = etDescription.text.toString()
-        val price = etPrice.text.toString()
+        val price = etAddPrice.text.toString()
         val type = tvType.text.toString()
         val space = etSpace.text.toString()
         val room = etRoomNum.text.toString()
         val bath = etBathNum.text.toString()
 
-        val la= requireActivity().intent.getDoubleExtra("product_latitude",31.32535135135135)
-        val lo= requireActivity().intent.getDoubleExtra("product_longitude",34.29015667840477)
-
-
-//        val home = HomeData(id=id, ownerName =uname, ownerId = uid, ownerImage = uimage, title = title
-//                , price = price, location = locat, description = description, homeImage = imageUrl,
-//            homeType = type, homeVideo = videoUrl, space = space)
+        val la= requireActivity().intent.getDoubleExtra("home_latitude",31.32535135135135)
+        val lo= requireActivity().intent.getDoubleExtra("home_longitude",34.29015667840477)
 
         val home = hashMapOf<String,Any>("id" to id,"ownerName" to uname, "ownerId" to uid, "ownerImage" to uimage, "title" to title
             , "price" to price, "location" to locat, "description" to description, "homeImage" to imageUrl,

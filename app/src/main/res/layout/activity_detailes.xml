@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/details_imgPuplisherProfile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:verticalScrollbarPosition="defaultPosition"
-        android:background="@color/white"
-        tools:context=".Activity.DetailesActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details_imgPuplisherProfile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:verticalScrollbarPosition="defaultPosition"
+    tools:context=".Activity.DetailesActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
                         app:srcCompat="@drawable/homeone" />
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/btnBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -95,12 +95,12 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
                         android:gravity="fill"
-                        app:cardBackgroundColor="#11F9F9F9"
-                        android:outlineSpotShadowColor="@color/gray"
+                        android:orientation="horizontal"
                         android:outlineAmbientShadowColor="@color/gray"
+                        android:outlineSpotShadowColor="@color/gray"
+                        android:padding="16dp"
+                        app:cardBackgroundColor="#08F9F9F9"
                         app:cardElevation="55dp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgHomeDetails"
                         app:layout_constraintStart_toStartOf="parent">
@@ -108,9 +108,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="16dp"
-                            android:background="#12A3A2A2"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp">
 
                             <TextView
                                 android:id="@+id/tvDetailesTitle"
@@ -157,8 +156,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="150M"
                                     android:paddingHorizontal="4dp"
+                                    android:text="150M"
                                     android:textColor="#FFFFFF" />
 
                                 <ImageView
@@ -172,8 +171,8 @@
                                     android:id="@+id/tvRoomDetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2 غرف"
                                     android:paddingHorizontal="4dp"
+                                    android:text="2 غرف"
                                     android:textColor="#FFFFFF" />
 
                                 <ImageView
@@ -187,8 +186,8 @@
                                     android:id="@+id/tvBathDetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2 حمام"
                                     android:paddingHorizontal="4dp"
+                                    android:text="2 حمام"
                                     android:textColor="#FFFFFF" />
                             </LinearLayout>
                         </LinearLayout>
@@ -213,9 +212,9 @@
                             android:backgroundTint="@color/white"
                             android:clickable="true"
                             app:fabCustomSize="45dp"
-                            app:tint="@color/blue"
                             app:fabSize="mini"
-                            app:srcCompat="@drawable/baseline_notifications" />
+                            app:srcCompat="@drawable/baseline_notifications"
+                            app:tint="@color/blue" />
 
                         <com.google.android.material.floatingactionbutton.FloatingActionButton
                             android:id="@+id/fabSharDetails"
@@ -225,9 +224,9 @@
                             android:backgroundTint="@color/white"
                             android:clickable="true"
                             app:fabCustomSize="45dp"
-                            app:tint="@color/blue"
                             app:fabSize="auto"
-                            app:srcCompat="@drawable/baseline_videocam_24" />
+                            app:srcCompat="@drawable/baseline_videocam_24"
+                            app:tint="@color/blue" />
 
                     </LinearLayout>
 
@@ -351,6 +350,7 @@
                         android:layout_height="36dp"
                         android:backgroundTint="@color/blue"
                         android:scaleType="fitCenter"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="@+id/tvPublisherName"
                         app:layout_constraintEnd_toStartOf="@+id/imgbtnPhoneNumber"
                         app:layout_constraintTop_toTopOf="@+id/tvPublisherName"
@@ -531,22 +531,21 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewkk"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="132dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#12FFFFFF">
 
                     <TextView
@@ -554,6 +553,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="التعليقات"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -579,14 +579,14 @@
                             android:id="@+id/btnSendComment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@color/white"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
-                            android:layout_margin="8dp"
                             app:fabCustomSize="45dp"
-                            android:background="@color/white"
                             app:fabSize="auto"
-                            app:tint="@color/blue"
-                            app:srcCompat="@drawable/baseline_near_me" />
+                            app:srcCompat="@drawable/baseline_near_me"
+                            app:tint="@color/blue" />
 
                         <EditText
                             android:id="@+id/etComment"
@@ -602,13 +602,68 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvComments"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewkk">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#12FFFFFF">
+
+                    <TextView
+                        android:id="@+id/texmbtViewww"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="رؤية موقع المستقر على الخريطة"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imgLocationDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/texmbtViewww" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.mostaqarapp.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.GeoPoint
 
 
 class HomeData(
@@ -19,7 +20,10 @@ class HomeData(
     var space:String? = "",
     var stayTime:String? = "",
     var room:String? = "",
-    var bathroom:String? = ""): Parcelable {
+    var bathroom:String? = "",
+    var lat:Double = 3.0,
+    var lng:Double = 3.0,
+): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -36,6 +40,8 @@ class HomeData(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readDouble(),
+        parcel.readDouble()
 //        TODO("homeDetails")
     ) {
     }
@@ -56,6 +62,8 @@ class HomeData(
         parcel.writeString(stayTime)
         parcel.writeString(room)
         parcel.writeString(bathroom)
+        parcel.writeDouble(lat)
+        parcel.writeDouble(lng)
     }
 
     override fun describeContents(): Int {

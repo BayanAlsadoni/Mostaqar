@@ -58,22 +58,23 @@ class VerificationActivity : AppCompatActivity() {
             linearLayoutVerify.visibility = View.INVISIBLE
             tvTimeout.visibility = View.INVISIBLE
             btnVerify.visibility = View.INVISIBLE
+            tvFerifyTitle.setText( "يرجى التحقق من رابط التحقق المرسل إلى بريدك")
             auth.createUserWithEmailAndPassword(user!!.email!!,user!!.password!!).addOnCompleteListener {task->
                 if(task.isSuccessful){
                     auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
-                        tvFerifyTitle.setText( "يرجى التحقق من رابط التحقق المرسل إلى بريدك")
-//                        if(auth.currentUser!!.isEmailVerified){
+                        Toast.makeText(this, "send verify link", Toast.LENGTH_SHORT).show()
+                        if(auth.currentUser!!.isEmailVerified){
                             startActivity(Intent(this,ConfirmActivity::class.java))
                             addUser(auth.currentUser!!.uid,user!!.name,user!!.email,user!!.password,user!!.location,user!!.phone)
                             addUserToken(auth.currentUser!!.uid, user!!.name, user!!.email)
-//                        }
+                        }
                     }
                 }else{
                     Toast.makeText(this, "verification faild", Toast.LENGTH_SHORT).show()
                 }
             }
         }else{
-            tvFerifyTitle.text = "يرجى التحقق من رابط التحقق المرسل إلى بريدك"
+            tvFerifyTitle.text = "يرجى التحقق من رمز التفعيل المرسل إلى هاتفك"
             startPhoneNumberVerification(phoneNumber)
     //        FirebaseAuth.getInstance().getFirebaseAuthSettings().forceRecaptchaFlowForTesting(true)
             btnVerify.setOnClickListener {

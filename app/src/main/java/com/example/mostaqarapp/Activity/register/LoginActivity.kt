@@ -68,10 +68,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        tvForgetPassword.setOnClickListener {
-            startActivity(Intent(this, ForgetPasswordActivity::class.java))
-        }
-
         buttonLogin.setOnClickListener {
             if (etEmail.text.isEmpty()) {
                 etEmail.error = errorMessage

@@ -37,12 +37,13 @@ class HomeVideoActivity : AppCompatActivity() {
 
         var auth = Firebase.auth
         video = findViewById<PlayerView>(R.id.video)
+        val tvVideo = findViewById<TextView>(R.id.tvVideo)
+        videoUrl = intent?.getStringExtra("videoUrl").toString()
 
         videoUrl = intent?.getStringExtra("videoUrl").toString()
         Toast.makeText(this, videoUrl.toString(), Toast.LENGTH_SHORT).show()
-        if (videoUrl == null || videoUrl=="null") {
-            val msg = findViewById<TextView>(R.id.msg)
-            msg.visibility = View.VISIBLE
+        if (videoUrl == null || videoUrl== "") {
+            tvVideo.visibility = View.VISIBLE
             video.visibility = View.INVISIBLE
         } else {
             Toast.makeText(this, videoUrl, Toast.LENGTH_SHORT).show()
@@ -57,7 +58,7 @@ class HomeVideoActivity : AppCompatActivity() {
 
         if (videoUrl != null || videoUrl!="null") {
             val mediaItem = MediaItem.Builder()
-                .setUri(videoUrl!!)
+                .setUri(videoUrl)
                 .setMimeType(MimeTypes.APPLICATION_MP4)
                 .build()
             val dataSourceFactory = DefaultDataSource.Factory(this)
@@ -69,7 +70,7 @@ class HomeVideoActivity : AppCompatActivity() {
             player1?.setMediaSource(mediaSource)
             player1?.prepare()
         } else {
-            val msg = findViewById<TextView>(R.id.msg)
+            val msg = findViewById<TextView>(R.id.tvVideo)
             msg.visibility = View.VISIBLE
             video.visibility = View.INVISIBLE
         }

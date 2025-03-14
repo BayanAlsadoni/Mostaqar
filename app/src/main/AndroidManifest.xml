@@ -28,13 +28,7 @@
         android:theme="@style/Theme.MostaqarApp"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.HomeVideoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Profile.EditHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.UserHomesActivity"
+            android:name=".UserHomesActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -49,7 +43,25 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBp_JlXZXvgDqlxj7l-4R6xxxGqfOgZJPU" /> <!-- <provider -->
+            android:value="AIzaSyBp_JlXZXvgDqlxj7l-4R6xxxGqfOgZJPU" />
+
+        <activity
+            android:name=".map.LocationMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_location_maps" />
+        <activity
+            android:name=".map.AddMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_maps" />
+        <activity
+            android:name=".Activity.HomeVideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.EditHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fragment.UserHomesActivity"
+            android:exported="false" /> <!-- <provider -->
         <!-- android:name="com.vansuita.pickimage.provider.PickImageProvider" -->
         <!-- android:authorities="${applicationId}.fileprovider" -->
         <!-- android:exported="false" -->

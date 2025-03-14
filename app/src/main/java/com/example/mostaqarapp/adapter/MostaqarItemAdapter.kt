@@ -10,8 +10,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mostaqarapp.Activity.DetailesActivity
+import com.example.mostaqarapp.Activity.chat.ChatActivity
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.HomeData
 import com.google.firebase.auth.FirebaseAuth
@@ -38,6 +40,8 @@ class MostaqarItemAdapter(val context: Context, val data: ArrayList<HomeData>):R
 //        var publisherImage = itemView.findViewById<ImageView>(R.id.publisherImage)
         var homeImage = itemView.findViewById<ImageView>(R.id.homeImage)
         var imgBtnSave = itemView.findViewById<ImageButton>(R.id.imgBtnSave)
+        var fabMessageUser = itemView.findViewById<ImageButton>(R.id.fabMessageUser)
+        var fabtnNotification = itemView.findViewById<ImageButton>(R.id.fabtnNotification)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterHolder {
@@ -69,7 +73,7 @@ class MostaqarItemAdapter(val context: Context, val data: ArrayList<HomeData>):R
             val gotToDetailsActivity = Intent(context, DetailesActivity::class.java)
             gotToDetailsActivity.putExtra("home",home)
 
-            Firebase.firestore.collection("homes").whereEqualTo("uid",Firebase.auth.currentUser?.uid).get().addOnSuccessListener {qs->
+            Firebase.firestore.collection("homes").whereEqualTo("ownerId",Firebase.auth.currentUser?.uid).get().addOnSuccessListener {qs->
                 gotToDetailsActivity.putExtra("isHomeOwner",true)
 
             }
@@ -107,6 +111,15 @@ class MostaqarItemAdapter(val context: Context, val data: ArrayList<HomeData>):R
 
             }
 
+        }
+        holder.fabMessageUser.setOnClickListener {
+            val gotToChat = Intent(context, ChatActivity::class.java)
+            gotToChat.putExtra("sender_id",home.ownerId)
+            gotToChat.putExtra("sender_name",home.ownerName)
+            gotToChat.putExtra("sender_image",home.ownerImage)
+            context.startActivity(gotToChat)
+        }
+        holder.fabtnNotification.setOnClickListener {
 
         }
 

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detailsFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:verticalScrollbarPosition="defaultPosition"
     android:background="@color/white"
     tools:context=".fragment.AddHomeFragment">
@@ -24,15 +25,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <ImageView
-                android:id="@+id/imageView17"
-                android:layout_width="20dp"
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_money"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
-                app:layout_constraintStart_toEndOf="@+id/tvPrice"
-                app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_arrow_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -47,6 +48,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/houses"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintHorizontal_bias="0.536"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
@@ -59,9 +70,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/etAddLocationText" />
 
             <TextView
                 android:id="@+id/tvTitle2"
@@ -75,9 +85,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditName" />
+                app:layout_constraintTop_toBottomOf="@+id/etAddTitle" />
 
             <TextView
                 android:id="@+id/tvAddImg"
@@ -94,60 +103,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView16" />
-
-            <EditText
-                android:id="@+id/etEditLocation"
-                android:layout_width="70dp"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/black"
-                android:ems="10"
-                android:inputType="number"
-                android:text="120"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
-                app:layout_constraintStart_toEndOf="@+id/imageView17"
-                app:layout_constraintTop_toTopOf="@+id/tvPrice" />
-
-            <TextView
-                android:id="@+id/tvPrice"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="السعر"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditPhone" />
-
-            <EditText
-                android:id="@+id/etEditBio"
-                android:layout_width="70dp"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/black"
-                android:ems="10"
-                android:inputType="number"
-                android:text="200"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tvSpaceItem"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="@+id/tvSpaceItem" />
-
-            <TextView
-                android:id="@+id/tvSpaceItem"
-                android:layout_width="80dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="32dp"
-                android:text="المساحة"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/etEditLocation"
-                app:layout_constraintTop_toBottomOf="@+id/etEditPhone" />
 
             <TextView
                 android:id="@+id/etAddType"
@@ -212,26 +167,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddImg" />
+                app:layout_constraintTop_toBottomOf="@+id/imgAddImg" />
 
-            <TextView
-                android:id="@+id/etAddImg"
+            <ImageView
+                android:id="@+id/imgAddImg"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape"
-                android:drawableBottom="@drawable/ic_photo_camera"
                 android:ems="10"
-                android:hint="أضف صورة"
+                android:scaleType="centerInside"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 app:layout_constraintEnd_toEndOf="@+id/tvAddImg"
                 app:layout_constraintStart_toStartOf="@+id/tvAddImg"
-                app:layout_constraintTop_toBottomOf="@+id/tvAddImg" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAddImg"
+                app:srcCompat="@drawable/ic_photo_camera" />
 
             <EditText
-                android:id="@+id/etAddLocation"
+                android:id="@+id/etAddLocationText"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -245,6 +200,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tvPlace"
                 app:layout_constraintStart_toStartOf="@+id/tvPlace"
                 app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+
 
             <TextView
                 android:id="@+id/tvPlace"
@@ -263,9 +219,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/etAddType" />
 
             <EditText
-                android:id="@+id/etEditName"
+                android:id="@+id/etAddTitle"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape"
                 android:ems="10"
@@ -278,8 +234,20 @@
                 app:layout_constraintStart_toStartOf="@+id/tvTitle"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
+            <ImageButton
+                android:id="@+id/imgBtnAddLocationMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00FFFFFF"
+                android:src="@drawable/ic_add_location"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/etAddLocationText"
+                app:layout_constraintEnd_toEndOf="@+id/etAddLocationText"
+                app:layout_constraintTop_toTopOf="@+id/etAddLocationText"
+                app:layout_constraintVertical_bias="0.0" />
+
             <EditText
-                android:id="@+id/etEditPhone"
+                android:id="@+id/etAddDescription"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -295,12 +263,178 @@
                 app:layout_constraintStart_toStartOf="@+id/tvTitle2"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle2" />
 
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAddDescription">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPrice"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="السعر"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/etAddPrice"
+                            android:layout_width="70dp"
+                            android:layout_height="45dp"
+                            android:backgroundTint="@color/black"
+                            android:drawableStart="@drawable/baseline_money"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="120"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvSpaceItem"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="المساحة"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:text="M²"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/etEditBio"
+                            app:layout_constraintStart_toStartOf="@+id/etEditBio"
+                            app:layout_constraintTop_toTopOf="@+id/etEditBio" />
+
+                        <EditText
+                            android:id="@+id/etEditBio"
+                            android:layout_width="70dp"
+                            android:layout_height="45dp"
+                            android:backgroundTint="@color/black"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="200"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tvSpaceItem"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="عدد الحمام"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/etBathNum"
+                            android:layout_width="70dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center_horizontal"
+                            android:backgroundTint="@color/black"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintVertical_bias="0.315" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="عدد الغرف"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+
+                        <EditText
+                            android:id="@+id/etRoomNum"
+                            android:layout_width="70dp"
+                            android:layout_height="45dp"
+                            android:backgroundTint="@color/black"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/add_btnNext"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/blue"
@@ -312,108 +446,39 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etRoomNum" />
-
-            <ImageView
-                android:id="@+id/imageView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/houses"
-                app:layout_constraintEnd_toEndOf="@+id/textView18"
-                app:layout_constraintHorizontal_bias="0.536"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_arrow_left"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/imgBtnAddLocationMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/ic_add_location"
-                app:layout_constraintBottom_toBottomOf="@+id/etAddLocation"
-                app:layout_constraintEnd_toEndOf="@+id/etAddLocation"
-                app:layout_constraintTop_toTopOf="@+id/etAddLocation" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="عدد الغرف"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditLocation" />
-
-            <EditText
-                android:id="@+id/etRoomNum"
-                android:layout_width="70dp"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/black"
-                android:ems="10"
-                android:inputType="number"
-                android:text="1"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintEnd_toEndOf="@+id/etEditLocation"
-                app:layout_constraintStart_toEndOf="@+id/imageView17"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="32dp"
-                android:text="عدد الحمام"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/etRoomNum"
-                app:layout_constraintTop_toBottomOf="@+id/tvSpaceItem" />
-
-            <EditText
-                android:id="@+id/etBathNum"
-                android:layout_width="70dp"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/black"
-                android:ems="10"
-                android:inputType="number"
-                android:text="1"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintEnd_toEndOf="@+id/etEditBio"
-                app:layout_constraintStart_toStartOf="@+id/etEditBio"
-                app:layout_constraintTop_toTopOf="@+id/textView5"
-                app:layout_constraintVertical_bias="0.315" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:text="M²"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvSpaceItem"
-                app:layout_constraintStart_toEndOf="@+id/tvSpaceItem"
-                app:layout_constraintTop_toTopOf="@+id/tvSpaceItem"
+                app:layout_constraintTop_toBottomOf="@+id/imgAddMapLocation"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_add_location"
+                android:drawableTint="@color/blue"
+                android:text="تحديد موقع المستقر على الخريطة"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+            <ImageView
+                android:id="@+id/imgAddMapLocation"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

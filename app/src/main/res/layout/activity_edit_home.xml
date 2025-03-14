@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <EditText
-                android:id="@+id/etEditPrice"
+                android:id="@+id/etAdkkdPrice"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:backgroundTint="@color/black"
@@ -227,7 +227,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvAddImg" />
 
             <EditText
-                android:id="@+id/etEditLocation"
+                android:id="@+id/etAddLocation"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"

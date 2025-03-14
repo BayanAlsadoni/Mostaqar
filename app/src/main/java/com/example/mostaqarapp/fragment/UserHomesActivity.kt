@@ -32,7 +32,7 @@ class UserHomesActivity : AppCompatActivity() {
 
     private fun getHomesFromFirebase(){
         Log.e("getHome","in function")
-        firestore.collection("home").whereEqualTo("uid",Firebase.auth.currentUser!!.uid).get()
+        firestore.collection("home").whereEqualTo("ownerId",Firebase.auth.currentUser!!.uid).get()
             .addOnSuccessListener { result ->//
                 homeData.clear()
                 Log.e("getHome","get collection")

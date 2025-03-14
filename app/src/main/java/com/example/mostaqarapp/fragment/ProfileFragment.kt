@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
         val cardViewContactUs = root.findViewById<CardView>(R.id.cardViewContactUs)
         val cardViewLogout = root.findViewById<CardView>(R.id.cardViewLogout)
         val cardViewAccount = root.findViewById<CardView>(R.id.cardViewAccount)
-        val cardViewFollowList = root.findViewById<CardView>(R.id.cardViewHomeList)
+        val cardViewHomesList = root.findViewById<CardView>(R.id.cardViewHomeList)
         val tvProfName = root.findViewById<TextView>(R.id.tvProfName)
 //        val clEditProfile = root.findViewById<ConstraintLayout>(R.id.clEditProfile)
         val profData = ArrayList<ProfileData>()
@@ -59,8 +59,8 @@ class ProfileFragment : Fragment() {
         cardViewAccount.setOnClickListener {
            startActivity(Intent(context, EditProfileActivity::class.java))
         }
-        cardViewFollowList.setOnClickListener {
-
+        cardViewHomesList.setOnClickListener {
+            startActivity(Intent(context,UserHomesActivity::class.java))
         }
 
         profData.add(ProfileData(R.drawable.keypad,"سياسة الاستخدام",R.drawable.accept_terms_rafiki))

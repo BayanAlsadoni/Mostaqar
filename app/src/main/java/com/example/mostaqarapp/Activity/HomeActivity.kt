@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import com.example.mostaqarapp.Activity.chat.ChatActivity
 import com.example.mostaqarapp.Activity.chat.UsersMessagesActivity
 import com.example.mostaqarapp.R
@@ -35,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(layoutContent,SaveFragment()).commit()
+            Toast.makeText(this, "add clicked", Toast.LENGTH_SHORT).show()
             btnSave.setImageResource(R.drawable.ic_fill_save)
 
         }
@@ -42,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
         btnAddHome.setOnClickListener {
 //            startActivity(Intent(this, AddHomeFirstActivity::class.java))
             supportFragmentManager.beginTransaction().replace(layoutContent,AddHomeFragment()).commit()
+            Toast.makeText(this, "add clicked", Toast.LENGTH_SHORT).show()
             btnAddHome.setImageResource(R.drawable.click_add)
 
         }

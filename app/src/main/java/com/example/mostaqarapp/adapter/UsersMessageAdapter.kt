@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.example.mostaqarapp.Activity.chat.ChatActivity
 import com.example.mostaqarapp.R
 import com.example.mostaqarapp.data.UsersMessageData
+import com.squareup.picasso.Picasso
 import java.util.*
 
 class UsersMessageAdapter(val context: Context, val data: ArrayList<UsersMessageData>): BaseAdapter() {
@@ -42,6 +43,7 @@ class UsersMessageAdapter(val context: Context, val data: ArrayList<UsersMessage
         tvName.text = prof.senderName
         tvMessage.text = prof.textMessage
         tvTime.text = prof.timestamp
+        Picasso.get().load(prof.senderImage).error(R.drawable.ic_account_circle).into(iv)
         adapterView.setOnClickListener {
             val goToChat = Intent(context, ChatActivity::class.java)
             goToChat.putExtra("sender_id", data[p0].uid)

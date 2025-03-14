@@ -174,7 +174,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/profile"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/person_add" />
+                        app:srcCompat="@drawable/ic_apartment" />
 
                     <TextView
                         android:id="@+id/tvFollowList"
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:gravity="center_vertical"
-                        android:text="قائمة المتابعة"
+                        android:text="عروضي"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold" />

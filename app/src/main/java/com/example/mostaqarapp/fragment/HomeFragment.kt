@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -166,6 +167,10 @@ class HomeFragment : Fragment() {
                 Log.e("getHome","get collection")
                 for (document in result){
                     Log.e("getHome","getDocument${document}")
+                    var location = document.getGeoPoint("mapLocation")
+                    if(location == null){
+                        location = GeoPoint(3.0,3.0)
+                    }
                     val home = HomeData(
                         document.getString("id"),
                         document.getString("ownerName"),
@@ -181,7 +186,9 @@ class HomeFragment : Fragment() {
                         document.getString("space"),
                         document.getString("stayTime"),
                         document.getString("room"),
-                        document.getString("bath")
+                        document.getString("bath"),
+                        location.latitude,
+                        location.longitude
                     )
                     homeData.add(home)
                     Toast.makeText(context, "${home}", Toast.LENGTH_SHORT).show()

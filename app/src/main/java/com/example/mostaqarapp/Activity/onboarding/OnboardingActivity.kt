@@ -18,28 +18,8 @@ class OnboardingActivity : AppCompatActivity() {
         var adapter = OnboardingAdapter(this)
         vpOnboarding.adapter = adapter
 
-
-        /*
-        val btnNext = findViewById<Button>(R.id.btnNext)
-        btnNext.setOnClickListener {
-            val current = viewPager.currentItem + 1
-            if (current < layouts.size) {
-                viewPager.currentItem = current
-            } else {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
-        * */
-
         val dotsIndicator = findViewById<DotsIndicator>(R.id.dots_indicator)
-//        val viewPager = findViewById<ViewPager>(R.id.view_pager)
-////        val adapter = ViewPagerAdapter()
-//        viewPager.adapter = adapter
         dotsIndicator.attachTo(vpOnboarding)
-
-        //yourTextView.setMovementMethod(new ScrollingMovementMethod());
-
 
     }
     class OnboardingAdapter(var fragmentActivity: FragmentActivity):FragmentStateAdapter(fragmentActivity){

@@ -3,6 +3,8 @@ package com.example.mostaqarapp.Activity.chat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mostaqarapp.R
@@ -15,20 +17,25 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        val uidReceiver = intent.getStringExtra("sender_id")
+        val name = intent.getStringExtra("sender_name")
+        val image = intent.getStringExtra("sender_image")
+
         val rcChat = findViewById<RecyclerView>(R.id.rcChat)
         val btnSendMessage = findViewById<FloatingActionButton>(R.id.btnSendMessage)
         val etSendMessage = findViewById<EditText>(R.id.etSendMessage)
+        val tvSenderChat = findViewById<TextView>(R.id.tvSenderChat)
+        val imgSenderChat = findViewById<ImageView>(R.id.imgSenderChat)
 
-        val uidReceiver = intent.getStringExtra("sender_id")
-        val name = intent.getStringExtra("sender_name")
-        val image = intent.getIntExtra("sender_image",R.drawable.ic_person_outline)
-
+        tvSenderChat.text = name
+        Picasso.get().load(image).error(R.drawable.ic_account_circle).into(imgSenderChat)
 
         val uidSender = Firebase.auth.currentUser?.uid
         val senderRoom = uidReceiver + uidSender
@@ -72,7 +79,7 @@ class ChatActivity : AppCompatActivity() {
             val hours = (timestamp / (1000 * 60 * 60) % 24)
             val time = "$hours:$minutes:$seconds"
 
-            val messageObject = ChatData(image,name!!,message,uidSender!!,uidReceiver!!,time)
+            val messageObject = ChatData(R.drawable.ic_person_outline,name!!,message,uidSender!!,uidReceiver!!,time)
             dbRef.child("chats").child(senderRoom).child("messages").push()
                 .setValue(messageObject).addOnSuccessListener {
                     dbRef.child("chats").child(receiverRoom).child("messages").push()
@@ -83,23 +90,3 @@ class ChatActivity : AppCompatActivity() {
 
     }
 }
-
-/*
-
-  chatData.add(ChatData(
-            R.drawable.ic_account_circle,"AhmedAli",
-            "مرحبا كيف حالك","1","2","08:47AM"))
-        chatData.add(ChatData(
-            R.drawable.ic_account_circle,"AhmedAli",
-            "بخير وأنت","2","1","08:47AM"))
-        chatData.add(ChatData(
-            R.drawable.ic_account_circle,"AhmedAli",
-            "الحمد لله","1","2","08:47AM"))
-        chatData.add(ChatData(
-            R.drawable.ic_account_circle,"AhmedAli",
-            "أريد أن أسألك بخصوص المنزل","2","1","08:47AM"))
-        chatData.add(ChatData(
-            R.drawable.ic_account_circle,"AhmedAli",
-            "تفضل كيف يمكنني أن أخدمك","1","2","08:47AM"))
-
- */

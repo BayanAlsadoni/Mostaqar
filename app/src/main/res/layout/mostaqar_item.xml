@@ -25,6 +25,7 @@
                 android:id="@+id/homeImage"
                 android:layout_width="0dp"
                 android:layout_height="170dp"
+                android:background="@color/white"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -131,24 +132,26 @@
                 android:clickable="true"
                 app:fabCustomSize="45dp"
                 app:fabSize="mini"
+                app:tint="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/homeImage"
                 app:srcCompat="@drawable/baseline_notifications" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton2"
+                android:id="@+id/fabMessageUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
                 android:background="@color/white"
+                android:backgroundTint="@color/white"
                 android:clickable="true"
                 app:fabCustomSize="45dp"
                 app:fabSize="auto"
                 app:layout_constraintBottom_toBottomOf="@+id/fabtnNotification"
                 app:layout_constraintEnd_toStartOf="@+id/fabtnNotification"
                 app:layout_constraintTop_toTopOf="@+id/fabtnNotification"
-                app:srcCompat="@drawable/baseline_near_me" />
+                app:tint="@color/blue"
+                app:srcCompat="@drawable/click_chat" />
 
             <ImageButton
                 android:id="@+id/imgBtnSave"

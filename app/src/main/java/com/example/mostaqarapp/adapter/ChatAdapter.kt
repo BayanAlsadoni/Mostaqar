@@ -51,10 +51,11 @@ class ChatAdapter(val context: Context, val messageList: ArrayList<ChatData>):Re
         val currentMsg = messageList[position]
         if(holder.javaClass == SendViewHolder::class.java){
             val viewHolder = holder as SendViewHolder
-            viewHolder.sendChat.text = currentMsg.message ?: "No message"
+            viewHolder.sendChat.text = currentMsg.message
+
         }else if (holder.javaClass == ReciveViewHolder::class.java){
             val viewHolder= holder as ReciveViewHolder
-            viewHolder.reciveChat.text = currentMsg.message ?: "No message"
+            viewHolder.reciveChat.text = currentMsg.message
         }
     }
 

@@ -40,14 +40,6 @@ class ProfileAdapter (val contex: Context, val data: ArrayList<ProfileData>)
         val prof = data[p0]
         iv.setImageResource(prof.icon)
         tv.text = prof.name
-//        adapterView.setOnClickListener {
-//            val i =Intent(contex, PolicyActivity::class.java)
-//            i.putExtra("text",tv.text)
-//            i.putExtra("image",iv)
-//        }
-//        btn.setOnClickListener{
-//            Toast.makeText(context,"Button clicked",Toast.LENGTH_SHORT).show()
-//        }
         return adapterView
 
     }
